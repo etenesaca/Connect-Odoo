@@ -1,11 +1,11 @@
-# Connect-Odoo
+# Connect-OpenERP
 
-Odoo API.
+OpenERP 7.0 API.
 
 ## Install
 
 ``` bash
-$ npm install connect-odoo --save
+$ npm install connect-openerp --save
 ```
 
 ## Usage
@@ -13,14 +13,14 @@ $ npm install connect-odoo --save
 ``` js
 // app.js
 
-const Odoo = require('connect-odoo');
+const OpenERP = require('connect-openerp');
 
-// Connnect to Odoo Server
-const odoo = new Odoo('localhost', 8069);
-odoo.connect('db_test');
+// Connect to OpenERP Server
+const openerp = new openerp('localhost', 8069);
+openerp.connect('db_test');
 
 var username = 'admin', password = 'admin';
-odoo.login(username, password, function (err, uid) {
+openerp.login(username, password, function (err, uid) {
 	if (err){
 		console.log(err)
 	} else {

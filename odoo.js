@@ -10,7 +10,7 @@ var _TestConnection = function (host, port, callback) {
     rpc_db.methodCall('list', [], callback);
 };
 
-Odoo = function(host, port){
+OpenERP = function(host, port){
 	var url = 'http://' + host + ':' + port;
 	this.url = url
 	this.host = host;
@@ -36,9 +36,9 @@ Odoo = function(host, port){
     });
     _TestConnection(this.host, this.port, function(err, db_list){        
         if (err)
-        	hoag.logger('Error Connecting to Odoo Server: ' + url, hoag.logger_type.error, true);
+        	hoag.logger('Error Connecting to OpenERP Server: ' + url, hoag.logger_type.error, true);
         else
-        	hoag.logger('Connecting sucessful to Odoo Server: ' + url, hoag.logger_type.info, true);
+        	hoag.logger('Connecting sucessful to OpenERP Server: ' + url, hoag.logger_type.info, true);
 	});
 };
 
@@ -61,8 +61,8 @@ var login = function(username, password, callback){
 	});
 };
 
-Odoo.prototype = {
+OpenERP.prototype = {
     connect: connect,
     login: login,
 };
-module.exports = Odoo
+module.exports = OpenERP

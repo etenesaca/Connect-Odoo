@@ -1,7 +1,7 @@
 {
-  "name": "connect-odoo",
+  "name": "connect-openerp",
   "version": "0.0.2",
-  "description": "Odoo API",
+  "description": "openerp 7.0 API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

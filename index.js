@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-module.exports = require('./odoo');
+module.exports = require('./openerp');
