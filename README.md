@@ -1,6 +1,6 @@
 # Connect-OpenERP
 
-OpenERP 7.0 API.
+OpenERP v7.0 API.
 
 ## Install
 
@@ -11,16 +11,15 @@ $ npm install connect-openerp --save
 ## Usage
 
 ``` js
-// app.js
-
+// Connect
 const OpenERP = require('connect-openerp');
 
 // Connect to OpenERP Server
-const openerp = new openerp('localhost', 8069);
-openerp.connect('db_test');
+const oerp = new OpenERP('localhost', 8069);
+oerp.connect('db_test');
 
 var username = 'admin', password = 'admin';
-openerp.login(username, password, function (err, uid) {
+oerp.login(username, password, function (err, uid) {
 	if (err){
 		console.log(err)
 	} else {
@@ -30,6 +29,15 @@ openerp.login(username, password, function (err, uid) {
 
 ```
 
+``` js
+// List Databases
+odoo.listDatabases(function (err, dblist) {
+	if (err)
+		console.log(err)	
+	else
+		console.log(dblist)
+});
+``` 
 
 
 ## License

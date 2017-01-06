@@ -1,10 +1,10 @@
 {
   "name": "connect-openerp",
-  "version": "0.0.2",
-  "description": "openerp 7.0 API",
+  "version": "0.0.6",
+  "description": "OpenERP v7.0 API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"OpenERP v7.0 Connector\" && exit 1"
   },
   "repository": {
     "type": "git",
