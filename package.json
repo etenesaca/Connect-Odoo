@@ -21,7 +21,7 @@
     "url": "https://github.com/etenesaca/Odoo-Connect/issues"
   },
   "dependencies": {
-    "hoag": "^0.1.1",
+    "hoag": "^0.1.5",
     "xmlrpc": "^1.3.2"
   }
 }
