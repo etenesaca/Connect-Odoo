@@ -1,6 +1,6 @@
 {
   "name": "connect-openerp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "OpenERP v7.0 API",
   "main": "index.js",
   "scripts": {
