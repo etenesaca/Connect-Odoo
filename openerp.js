@@ -126,6 +126,7 @@ EXECUTE ORM METHODS
 var execObject = function(model, method) {
     var rpc_object = this.rpc_object;
     var params = [this.db, this.uid, this.password]
+    hoag.logger.info(`OpenERP Connecting ${this.url} || model:${model}/${method}`)
     for (var i in arguments)
         params.push(arguments[i]);
     return new Promise(function(resolve, reject) {
