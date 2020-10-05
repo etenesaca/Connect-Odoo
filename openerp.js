@@ -5,8 +5,8 @@
 var xmlrpc = require('xmlrpc');
 var hoag = require('hoag');
 
-var getDbList = function(protocol, host, port) {
-    return new Promise(function(resolve, reject) {
+var getDbList = function (protocol, host, port) {
+    return new Promise(function (resolve, reject) {
         var rpc_db = xmlrpc.createClient({
             host: host,
             port: port,
@@ -15,14 +15,14 @@ var getDbList = function(protocol, host, port) {
         if (protocol == 'https') {
             rpc_db.isSecure = true;
         }
-        rpc_db.methodCall('list', [], function(err, result) {
+        rpc_db.methodCall('list', [], function (err, result) {
             if (err) return reject(err);
             resolve(result);
         });
     });
 };
 
-var OpenERP = function(protocol, host, port, db) {
+var OpenERP = function (protocol, host, port, db) {
     this.protocol = protocol;
     this.host = host;
     this.port = port;
@@ -71,11 +71,11 @@ var OpenERP = function(protocol, host, port, db) {
 // List Databases
 var listDatabases = () => getDbList(this.protocol, this.host, this.port);
 // Test Connection
-var testConnection = function() {
+var testConnection = function () {
     var protocol = this.protocol;
     var host = this.host;
     var port = this.port;
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         getDbList(protocol, host, port)
             .then(result => {
                 resolve(result && true || false)
@@ -84,8 +84,8 @@ var testConnection = function() {
     })
 };
 // Check database is available
-var checkDb = function(db_name) {
-    return new Promise(function(resolve, reject) {
+var checkDb = function (db_name) {
+    return new Promise(function (resolve, reject) {
         this.listDatabases()
             .then(dbList => {
                 var db_found = false;
@@ -99,14 +99,14 @@ var checkDb = function(db_name) {
     });
 };
 //Method to login user
-var login = function(username, password, db) {
+var login = function (username, password, db) {
     if (db)
         this.db = db;
     var db = this.db;
     this.username = username;
     this.password = password;
-    return new Promise(function(resolve, reject) {
-        this.rpc_common.methodCall('login', [db, username, password], function(err, uid) {
+    return new Promise(function (resolve, reject) {
+        this.rpc_common.methodCall('login', [db, username, password], function (err, uid) {
             if (err) return reject(err)
             this.uid = uid; // SET USER ID
             resolve(uid);
@@ -114,7 +114,7 @@ var login = function(username, password, db) {
     })
 };
 // Set Credentials Exists Previous Login Information
-var setUID = function(username, uid, password) {
+var setUID = function (username, uid, password) {
     this.username = username;
     this.uid = uid;
     this.password = password;
@@ -123,41 +123,41 @@ var setUID = function(username, uid, password) {
 /*
 EXECUTE ORM METHODS
 */
-var execObject = function(model, method) {
+var execObject = function (model, method) {
     var rpc_object = this.rpc_object;
     var params = [this.db, this.uid, this.password]
     hoag.logger.info(`OpenERP Connecting ${this.url} || model:${model}/${method}`)
     for (var i in arguments)
         params.push(arguments[i]);
-    return new Promise(function(resolve, reject) {
-        rpc_object.methodCall('execute', params, function(err, result) {
+    return new Promise(function (resolve, reject) {
+        rpc_object.methodCall('execute', params, function (err, result) {
             if (err) return reject(err)
             resolve(result);
         });
     });
 };
-var search = function(model, args, offset, limit, order, context) {
+var search = function (model, args, offset, limit, order, context) {
     offset = offset && !isNaN(parseFloat(offset)) && isFinite(offset) && parseInt(offset) || 0;
     limit = limit && !isNaN(parseFloat(limit)) && isFinite(limit) && parseInt(limit) || null;
     order = order || '';
     context = context || {};
     return this.execObject(model, 'search', args, offset, limit, order, context)
 };
-var create = function(model, values, context) {
+var create = function (model, values, context) {
     context = context || {};
     return this.execObject(model, 'create', values, context)
 };
-var write = function(model, ids, values, context) {
+var write = function (model, ids, values, context) {
     ids = typeof ids == 'number' && [ids] || ids;
     context = context || {};
     return this.execObject(model, 'write', ids, values, context)
 };
-var read = function(model, ids, fields, context) {
+var read = function (model, ids, fields, context) {
     fields = fields || [];
     context = context || {};
     return this.execObject(model, 'read', ids, fields, context)
 };
-var unlink = function(model, ids, values) {
+var unlink = function (model, ids, values) {
     ids = typeof ids == 'number' && [ids] || ids;
     context = context || {};
     return this.execObject(model, 'unlink', ids, context)
